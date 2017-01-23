@@ -1,5 +1,2 @@
-1、安装模块命令：
-npm install 
-2、编译命令：
-gulp  压缩
-gulp dev 不压缩
+1、安装模块命令：npm install 
+2、编译命令：gulp  压缩   gulp dev 不压缩
