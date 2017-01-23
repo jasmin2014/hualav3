@@ -1,0 +1,48 @@
+<div>	
+	<div class="abox showabox">
+		<form  name="form">
+		<p class="addressbox scalebox">
+			<input type="search" name="keywords" ng-model="key" placeholder="搜索本店商品" ng-keyup="mykeyUp($event)" auto-focus-when="searchFocus">
+		</p>
+		<a href="javascript:history.go(-1)" class="cancelsearch">取消</a>
+		</form>
+	</div>
+	<article class="searchlabel whitebg">
+	  <p class="searchtitle btmbdr"><span>大家都在搜</span></p>
+	  <ul class="searchlabels clear">
+	  	<li ng-click="searchMyItems('香烟')">香烟</li>
+	  	<li ng-click="searchMyItems('牛奶')">牛奶</li>
+	  	<li ng-click="searchMyItems('洗衣粉')">洗衣粉</li>
+	  	<li ng-click="searchMyItems('调味料')">调味料</li>
+	  </ul>
+	</article>
+</div>
+<article:prolist class="greybgclr catelist_m">
+	<div class="prolist_title">搜索“{{key}}”的结果</div>
+	<ul:prolist class="clear" infinite-scroll='searchItems(key)'>
+		<li ng-if="goodsList.length>0" ng-repeat='g in goodsList'>
+			<a ng-href="#/goods/detail?sellerId={{sellerId}}&goodsId={{::g.goodsId}}">
+				<p class="propic">
+					<img ng-if="g.picUrl!=undefined&&g.picUrl!=''" square-picture ng-src="{{imgUrl}}{{::g.picUrl}}?s=220x220">
+					<img ng-if="g.picUrl==undefined||g.picUrl==''" square-picture class="radiuspic" ng-src="assets/v3/images/defaultpic4.png">
+				</p>
+				<p class="proname">{{::g.title}}</p>
+			</a>
+			<div class="proprice">
+				<span class="p_price">{{g.price/100 | currency:"￥"}}</span>
+				<div class="icon-cart" add-cart goods="g" seller-id="sellerId">
+					<em class="iconfont">&#xe677;</em>
+				</div>
+			</div>
+			<p class="rightline"></p> <span class="cartsuccess_ico"
+			ng-if="g.goodNum>0"><em class="iconfont">&#xe63e;</em></span>
+		</li>
+		<li ng-if="goodsList.length==0&&finish" class="goodlist_blank">
+			<div class="gb_pic">
+		        <img src="assets/v3/images/blankico.png">
+		    </div>
+		    <p class="gb_txt">没有查询到结果<br>请选择其它关键字</p>
+		</li>
+	</ul:prolist>
+	<p class="loadmoregoods" ng-if="goodsList.length!=0&&finish">没有更多数据...</p>	
+</article:prolist>

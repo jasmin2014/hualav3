@@ -1,0 +1,90 @@
+<hl-header seearound='true' searchbox='true'></hl-header>
+
+<article:detail class="whitebg">
+<div class="ui-page">
+    <div class="ui-bannerSwipe">
+	  <div  class='ui-banner-swipe-wrap'>
+		
+		<div ng-if="(goods.imgUrlList==undefined||goods.imgUrlList.length==0)&&(goods.picUrl==undefined||goods.picUrl=='')">
+			<img ng-src="assets/v3/images/defaultpic4.png" alt="" />
+		</div>
+		<div ng-if="(goods.imgUrlList==undefined||goods.imgUrlList.length==0)&&(goods.picUrl!=undefined&&goods.picUrl!='')">			
+			<img ng-src="{{imgUrl}}{{goods.picUrl}}" alt="" />
+		</div>
+		<div ng-if="(goods.imgUrlList.length==1&&goods.imgUrlList[0]=='')&&(goods.picUrl!=undefined&&goods.picUrl!='')">			
+			<img ng-src="{{imgUrl}}{{goods.picUrl}}" alt="" />
+		</div>
+		<div ng-if="goods.imgUrlList.length>=1&&goods.imgUrlList[0]!=''" ng-repeat="p in goods.imgUrlList" hl-swipe>			
+			<img ng-if="p==undefined||p==''" ng-src="assets/v3/images/defaultpic4.png" alt="" />
+			<img ng-if="p!=undefined&&p!=''" ng-src="{{imgUrl}}{{p}}" alt="" />			
+		</div>		
+		
+	  </div>
+	  <ul ng-if="goods.imgUrlList&&goods.imgUrlList.length>1" class="ui-banner-swipe-nav">
+	    <li ng-repeat="p in goods.imgUrlList"></li>
+	  </ul>		  	
+    </div>
+    <em ng-if="goods.actPicUrl" class="{{goods.actPicUrl}}-status icon-item-detail big"></em>
+</div> 
+<div class="proinfo">
+  <p class="proname">{{::goods.title}}</p>
+  <p class="greyclr promess" ng-if="goods.goodsDesc!=''">{{::goods.goodsDesc}}</p>
+  <p class="proprice">
+  	<span>{{goods.price/100 | currency:"￥"}}</span>
+  	<span ng-if="goods.salePrice>goods.price" class="greyclr oldprice">{{goods.salePrice/100 | currency:"￥"}}</span>
+  	<span ng-if="goods.salePrice>goods.price" class="discont">{{(goods.price/goods.salePrice)*10 | tofixd}}折</span>
+  </p>
+  <p class="prosuperlier"><a href="javascript:void(0)">{{goods.supplierName}}</a>　|　销量：{{goods.sales}}</p>    
+</div>
+<div class="graphic-more" ng-show="showGoodsDetail">
+	<p class="graphic-txt" ng-click="getGraphic()">图文<br/>详情</p>
+</div>
+</article:detail>
+
+<article:shoplist class="noboder detailpage whitebg">
+  <h3 class="activity-t"></h3>
+  <section>
+  	<div class="sellermess">
+	    <p class="shoppic">
+	        <img ng-if="seller.imgUrl!=undefined&&seller.imgUrl!=''" class="radiuspic lazy" ng-src="{{::imgUrl}}{{::seller.imgUrl}}?s=220x220" >
+			<img ng-if="seller.imgUrl==undefined||seller.imgUrl==''" class="radiuspic lazy" ng-src="assets/v3/images/defaultpic02.png" alt="默认店铺图片">
+	    </p>
+	    <div class="shop-mess">
+	      <h3>{{::seller.name}}</h3>
+	      <p>营业时间：{{seller.openTime}}-{{seller.endTime}}</p>
+	      <!-- <p>起送{{seller.startAmount/100 | currency:"￥"}}| 配送费{{seller.deliveryAmount/100 | currency:"￥"}}</p> -->
+	    </div>
+	    <p collect seller-id="seller.id" show="show"></p>
+	    <a href="#/seller/{{seller.id}}" title="{{seller.name}}"></a>
+    </div>
+  </section>
+  <div class="elselink clear mt15">
+    <a href="#/goods/cat?sellerId={{seller.id}}&sellerName={{seller.name}}&cid={{goods.cid}}">同类商品</a>
+    <a href="#/goods/cat?sellerId={{seller.id}}&sellerName={{seller.name}}">全部商品</a>
+  </div>
+</article:shoplist>
+<!-- <div class="graphic-more" ng-show="showGoodsDetail">
+	<p class="graphic-txt" ng-click="getGraphic()">图文<br/>详情</p>
+</div> -->
+<div class="graphic-details" id="graphic-details" ng-bind-html="dCtrl.explicitlyTrustedHtml">
+	
+</div>
+<div class="detail-page">
+<footer class="detailfooter">
+  <ul class="clear">
+    <li>
+      <a href="#/seller/{{seller.id}}">
+        <p><em class="greyclr iconfont">&#xe616;</em></p>
+        <p class="small_txt">店铺</p>
+      </a>
+    </li>
+    <li>
+      <a href="javascript:;" ng-click="gotop()">
+        <p><em class="greyclr iconfont">&#xe676;</em></p>
+        <p class="small_txt">顶部</p>
+      </a>
+    </li>    
+  </ul>
+  <div class="addtocart_deitail"  add-cart pagename="detail" goods="goods" seller-id="seller.id">加入购物车</div>
+</footer>
+</div>

@@ -1,0 +1,82 @@
+<div class="cateheader" id="myheader">
+	<hl-header seearound='true' searchbox='true' cartList="{{cartList}}"></hl-header>
+
+	<nav:catelist class="pt3em">
+		<p class="i-mask" ng-click='show=false;myVar=false;show2=false' ng-show="myVar"></p>
+		<div>
+			<p ng-click='show=true;show2=false;myVar=true'
+				ng-class="{'active':show}">
+				<em class="iconfont">&#xe674;</em>分类
+			</p>
+			<div class="cateslist" ng-show="show">
+				<div class="cates_01">
+					<ul>
+						<li><p class="iconfont" ng-click="show=false;myVar=false;">&#xe60d;</p></li>
+						<li ng-click='subCat({cname:"全部分类"});getCat("","全部分类");' ng-class="{activeitem : !active}"><p>全部分类</p></li>
+						<li ng-repeat='c in cates' ng-click='subCat(c);' ng-class="{activeitem : c.cid==active}">
+							<p>{{::c.cname}}</p>
+						</li>
+					</ul>
+				</div>
+				<div class="cates_02">
+					<h2 class="cates_title" ng-show="subcatename!=''||subcatename!=undefined"><p>{{subcatename}}</p></h2>
+					<ul class="clear">
+						<li ng-repeat='sc in subcates' ng-click='getCat(sc.cid,sc.cname)'>
+							<span class="cates_pic" ng-if="sc.catImg"><img alt="" ng-src="{{imgUrl}}{{sc.catImg}}?s=220x220" square-picture></span>
+							<span class="cates_pic" ng-if="!sc.catImg"><img alt="" ng-src="assets/v3/images/defaultpic4.png" square-picture></span>
+							<p>{{::sc.cname}}</p>
+						</li>
+					</ul>
+					<div class="cate_all" ng-show="active!=undefined" ng-click="getCat(active,subcatename,'1')">查看全部</div>
+				</div>
+			</div>
+		</div>
+		<div ng-click='getSort()'>
+			<p>默认</p>
+		</div>
+		<div ng-click='getSort("sales")'>
+			<p>销量</p>
+		</div>
+		<div>
+			<p ng-click="show=false;show2=true;myVar=true"
+				ng-class="{'active':show2}">全部商品</p>
+			<ul class="choosecates hidden" ng-class="{'hidden':!show2}" ng-cloak>
+				<li ng-repeat="s in supplier"><p ng-click='getSup(s.id)'>{{s.name}}</p></li>
+				<li><p ng-click='getSup()'>查看全部</p></li>
+			</ul>
+		</div>
+	</nav:catelist>
+</div>
+<article:prolist class="pt6 greybgclr catelist_m">
+	<div class="prolist_title">{{subCateName}}</div>
+	<ul:prolist class="clear" infinite-scroll='getGoods()' ng-if="goodsList.length>0">
+		<li ng-repeat='g in goodsList'><a
+			ng-href="#/goods/detail?sellerId={{sellerId}}&goodsId={{::g.goodsId}}">
+				<p class="propic">
+					<img ng-if="g.picUrl!=undefined&&g.picUrl!=''" square-picture ng-src="{{imgUrl}}{{::g.picUrl}}?s=220x220">
+					<img ng-if="g.picUrl==undefined||g.picUrl==''" square-picture class="radiuspic" ng-src="assets/v3/images/defaultpic4.png">
+				</p>
+				<p class="proname">{{::g.title}}</p>
+		</a>
+			<div class="proprice">
+				<span class="p_price">{{g.price/100 | currency:"￥"}}</span>
+				<div class="icon-cart" add-cart goods="g" seller-id="sellerId">
+					<em class="iconfont">&#xe677;</em>
+				</div>
+			</div>
+			<p class="rightline"></p> <span class="cartsuccess_ico"
+			ng-if="g.goodNum>0"><em class="iconfont">&#xe63e;</em></span>
+			<em ng-if="g.actPicUrl!=''" class="{{g.actPicUrl}}-status small"></em>
+		</li>			
+	</ul:prolist>
+	<p class="loadmoregoods" ng-show="finish" ng-if="goodsList.length>0">没有更多数据...</p>
+	<div class="collect_blank ng-scope" id="collect_blank" ng-if="loadingdata&&goodsList.length==0"> 
+		<div class="collect_bb">
+			<p class="collect_bbpic"><img src="assets/v3/images/blankico.png"></p>
+			<p class="co-btn">暂无商品</p>
+		</div>
+	</div>
+</article:prolist>
+
+<div class="gotop" ng-click="gotop()"><em class="iconfont">&#xe636;</em>TOP
+</div>

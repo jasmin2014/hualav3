@@ -1,0 +1,71 @@
+<div class="order_page ">
+<hl-header seearound='true'></hl-header>
+
+<article:cartmodule class="whitebg mt3d2">
+  <header>
+    <p class="shopname">{{orderDetail.seller.name}}</p>
+    <span class="myorder_shop_ico"><em class="iconfont"></em></span>
+    <span class="havepay shoplink">{{orderDetail.orderStatusStr}}</span> 
+  </header>
+  <section class="cartitem" ng-repeat="og in orderDetail.orderGoods">
+    <div class="clear">
+      <p class="ct-pic">
+		<img ng-if="og.picUrl!=undefined&&og.picUrl!=''" ng-src="{{imgUrl}}{{og.picUrl}}">
+		<img ng-if="og.picUrl==undefined||og.picUrl==''" src="assets/v3/images/defaultpic4.png">
+	  </p>
+      <div class="ct-name">
+        <p class="ct-pname">{{og.goodsName}}</p>
+        <p class="ct-shopname greyclr">{{og.supplierName}}</p>
+        <p class="ct-price">￥<span class="p_active">{{og.salePrice/100}}</span></p>
+      </div>
+    	  <span class="orderStatus greyclr">{{og.orderGoodsStatusStr}}</span>
+      <div class="goodNum">X{{og.goodsNumber}}</div>
+    </div>
+  </section>
+</article:cartmodule>
+<article:cartmodule class="whitebg">
+    <ul class="moneyDetail">
+    	<li class="clear"><span>运费金额：</span><span class="m_right">{{orderDetail.shippingAmount/100 | currency:"￥"}}</span></li>
+    	<li class="clear"><span>优惠金额：</span>
+    		<span class="m_right">{{orderDetail.discountAmount/100 | currency:"￥"}}</span>
+    	</li>
+    	<li class="clear"><span>应付金额：</span><span class="m_right">{{orderDetail.orderAmount/100 | currency:"￥"}}</span></li>
+    	<li class="clear"><span>实付金额：</span><span class="m_right">{{orderDetail.payAmount/100 | currency:"￥"}}</span></li>
+    </ul>
+</article:cartmodule>
+<article:cartmodule class="whitebg mt15 pb4em">
+  <header>
+    <p class="shopname">订单详情</p>
+    <span class="myorder_shop_ico"><em class="iconfont"></em></span> </header>
+    <ul class="moneyDetail">
+    	<li class="greyclr">订单编号：{{orderDetail.orderSn}}</li>
+    	<li class="greyclr">订单时间：{{orderDetail.addTime | date:"yyyy-MM-dd HH:mm:ss"}}</li>
+    	<li class="greyclr">提货方式：{{orderDetail.shippingTypeStr}}</li>
+    	<li class="greyclr">商铺名称：{{orderDetail.seller.name}}</li>
+    	<li class="greyclr">商铺电话：{{orderDetail.seller.phone}}</li>
+    	<li class="greyclr">商铺地址：{{orderDetail.seller.address}}</li>
+    	<li class="greyclr">收货姓名：{{orderDetail.consignee}}</li>
+    	<li class="greyclr">收货电话：{{orderDetail.mobile}}</li>
+    	<li class="greyclr">收货地址：{{orderDetail.address}}</li>
+    	<li class="greyclr">预约时间：{{orderDetail.bestTime}}</li>
+    	<li class="greyclr">订单备注：{{orderDetail.postscript}}</li>
+    </ul>
+    <footer class="orderDetail fixed"> 
+		<div ng-if="orderDetail.orderStatus=='no_pay'" class="clear o-btns">
+			<div class="o-btn o-left go-pay-order" ng-click="goPay(orderDetail.id)">立即支付</div>
+			<div class="o-btn go-cancel o-right go-cancel-order" ng-click="orderExec('cancel')">取消订单</div>
+		</div>
+		<a ng-if="orderDetail.orderStatus=='return_goods'||orderDetail.orderStatus=='have_pay'" href="tel:{{orderDetail.seller.phone}}" class="o-btn singleBtn">致电老板</a>
+		<div ng-if="orderDetail.orderStatus=='wait_take'||orderDetail.orderStatus=='shipping_done'" class="clear o-btns">
+			<a href="tel:{{orderDetail.seller.phone}}" class="o-btn o-left">致电老板</a>
+			<div class="o-btn go-confirm o-right" ng-click="orderExec('have_done')">确认收货</div>
+		</div>
+		<div ng-if="orderDetail.orderStatus=='shipping'" class="clear o-btns">
+			<a href="tel:{{orderDetail.seller.phone}}" class="o-btn o-left">致电老板</a>
+			<div class="o-btn go-confirm o-right" ng-click="orderExec('have_done')">确认收货</div>
+		</div>
+		<a ng-if="orderDetail.orderStatus=='have_done'" href="tel:{{orderDetail.seller.phone}}" class="o-btn singleBtn">致电老板</a>
+		<a ng-if="orderDetail.orderStatus=='close'||orderDetail.orderStatus=='cancel'" href="tel:{{orderDetail.seller.phone}}" class="o-btn singleBtn">致电老板</a>
+    </footer>
+</article:cartmodule>
+</div>

@@ -1,0 +1,24 @@
+<article:shoplist class="collectionpage">
+  <section ng-if="clists.length>0" class="whitebg bottombdr" ng-repeat="c in clists" ng-swipe-left="showdeleteFn(c,clists)">  		
+  	<div class="sellermess">
+	  	<p class="shoppic">
+	  		<img ng-if="c.imgUrl!=undefined&&c.imgUrl!=''" class="radiuspic" ng-src="{{::imgUrl}}{{::c.imgUrl}}?s=220x220" >
+			<img ng-if="c.imgUrl==undefined||c.imgUrl==''" class="radiuspic" ng-src="assets/v3/images/defaultpic02.png">
+	  	</p>  	
+	  	<div class="shop-mess">
+	  	  <h3>{{c.name}}</h3>
+	  	  <p>营业时间：{{c.openTime}}-{{c.endTime}}</p>
+	  	  <!-- <p>起送{{c.startAmount/100 | currency:"￥"}} | 配送费{{c.deliveryAmount/100 | currency:"￥"}} | 销量 {{c.sales}}</p> -->
+	  	</div>
+	  	<a href="#/seller/{{c.id}}">{{c.name}}</a>
+	  	<div class="cancel_coll hidden" ng-click="del(c.id)"><p>删除</p></div>
+  	</div>
+  	<div class="cancelcollect animated" ng-show="collectid==c.id" ng-class="{'slideInFromRight':collectid==c.id}" ng-click="cancelcollectFn(c)"><span>删除</span></div>
+  </section> 
+  <section ng-if="clists.length==0" class="collect_blank ng-scope" id="collect_blank"> 
+	<div class="collect_bb">
+		<p class="collect_bbpic"><img src="assets/v3/images/blankico.png"></p>
+		<p class="co-btn">暂无收藏的店铺</p>
+	</div>
+  </section>  
+</article:shoplist>

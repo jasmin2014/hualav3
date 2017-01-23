@@ -1,0 +1,108 @@
+<div class="order_page" id="confirmpage">
+<!-- <hl-header></hl-header> -->
+<div class="confirmpage">
+
+<article:cartaddress class="whitebg" ng-init="showorderTimes=false">
+  <img src="assets/v3/images/addressbg.png" class="cpic">
+  <div class="cartmessage" ng-if="address">  	
+    <p><span class="greyclr a_label">收货人：</span>{{address.consignee}}<span class="phonenumber">{{address.mobile}}</span></p>
+    <p class="clear cm-address"><span class="a_label greyclr">地址：</span><span class="a_addressinfo">{{address.signBuilding}}{{address.address}}</span></p>  	
+  </div>
+  <div class="cartmessage" ng-if="!address">
+  	<p><span class="greyclr a_label">收货人：</span>花啦用户</p>
+    <p class="clear cm-address"><span class="a_label greyclr">地址：</span><span class="a_addressinfo">暂无地址</span></p>
+  </div>
+  <p class="headericon greyclr"><em class="iconfont"></em></p>
+</article:cartaddress>
+<article:itempic class="mt15 whitebg" id="myproducts">
+  <ul class="clear">
+	<li ng-repeat="o in order.orderGoods">
+      <p class="item-pic" ng-if="$index<5">
+      	<img ng-if="o.picUrl!=undefined&&o.picUrl!=''" ng-src="{{imgUrl}}{{o.picUrl}}?s=220x220">
+      	<img ng-if="o.picUrl==undefined||o.picUrl==''" src="assets/v3/images/defaultpic4.png">
+      </p>
+      <div ng-if="o.length==1" class="item-info">
+        <h3>{{o.goodsName}}</h3>
+        <p class="item-name greyclr">{{o.supplierName}}</p>
+        <p class="ct-price"><span class=" p_active">{{o.price/100 | currency:"￥"}}</span></p>
+      </div>
+      <span class="num_label" ng-if="o.goodsNumber>1">{{::o.goodsNumber}}</span>
+    </li>	
+  </ul>
+  <div class="item-total">共{{ogoodslen}}件</div>
+  <div ng-if="order.orderGoods.length>4">
+  	<div class="item-more"><span class="iconfont">&#xe675;</span></div>
+  	<div class="item-more_e" ng-click="showPops('showgoods')"></div>
+  </div>
+</article:itempic>
+<article:item class="mt15 whitebg">
+      预约时间  <span class="greyclr">(仅超市、自营)</span>
+  <div class="choosedate_click" ng-click="showPops('showtimes')">
+    <p class="current-time">
+       <span>{{order.orderSendTime}}</span>
+    </p>
+    <p class="changeaddressico rightico"><em class="iconfont">&#xe625;</em></p>
+  </div>
+</article:item>
+<article:item class="mt15 whitebg">
+  	商家活动 
+  <p class="current-hds">
+  		<span class="active_blank">暂无活动</span>
+  </p>
+</article:item>
+
+<!-- 红包/优惠券 葛灵燕修改：2015-12-23 14:20  start-->
+<article:item class="mt15 whitebg">
+  红包/优惠券
+  <div  class="choosedate_click">      
+    <p ng-show="order.actCart.length>0&&defaultshow==0" class="changeaddressico rightico"  ng-click="showPops('showcoupons')"><em class="iconfont">&#xe625;</em></p>
+    <p ng-show="order.actCart.length>0&&defaultshow==1" class="rightico deleteEnve" ng-click="defaultshow=0;order.discountAmount=0;"><em class="iconfont">&#xe624;</em></p>
+    <p ng-show="order.actCart.length<=0" class="enve_blank greyclr">暂无红包</p>	    
+    <p ng-show="order.actCart.length>0&&defaultshow==0" class="current-time">有{{order.actCart.length}}个红包可用</p>
+    <p ng-show="order.actCart.length>0&&defaultshow==1" class="current-time">{{order.redName}}</p>    
+  </div>
+  
+</article:item>
+<!-- 红包/优惠券 葛灵燕修改：2015-12-23 14:20  end-->
+<div class="mt15 whitebg choosemethod">
+	<h3>选择配送方式</h3>
+     <div class="pick_up_personal" ng-click="cType(1)" ng-class="{'active':order.shippingType==1}">
+       <p>自行提货 <span class="redclr">(免配送费)</span></p>
+       <p class="pick_up_address greyclr">商家地址：{{seller.address}}{{seller.name}}</p>
+       <span class="changeaddressico"><em class="iconfont hidden"></em></span>
+     </div>
+     <div class="pick_up_ps" ng-click="cType(0)" ng-class="{'active':order.shippingType==0}">
+       <p>商家配送</p>
+       <span class="changeaddressico"><em class="iconfont hidden"></em></span>
+     </div>
+</div>
+<article:item class="mt15 whitebg money_m">
+  <div class="clear">
+    <span class="money_l">运费金额：</span>
+    <span class="money_p">{{order.shippingAmount/100 | currency:"￥"}}</span>
+  </div>
+  <div class="clear">
+    <span class="money_l">抵用金额：</span>
+    <span class="money_p">{{order.discountAmount/100 | currency:"￥"}}</span>
+  </div>
+  <div class="clear">
+    <span class="money_l">商品金额：</span>
+    <span class="money_p">{{order.goodAmount/100 | currency:"￥"}}</span>
+  </div>  
+</article:item>
+
+<article:item class="mt15 whitebg">
+  买家留言：
+  <p class="message"><input type="text" ng-model="order.postscript" placeholder="30个字以内"></p>
+</article:item>
+<article:item class="mt15 footer_buy">
+  <div>
+   <p class="c_yingfu"> 应付：<span class="money_p">{{(order.goodAmount+order.shippingAmount-order.discountAmount)/100 | currency:"￥"}}</span></p>
+   <!-- <button class="gotobuy" ng-click="showPops('choosemethodtype')">下订单</button> -->
+   <button class="gotobuy" ng-disabled="!(order.shippingType==1||order.shippingType==0)" ng-click="confirm_C(order.shippingType)">下订单</button>
+  </div>	    
+</article:item>
+</div>
+
+</div>
+

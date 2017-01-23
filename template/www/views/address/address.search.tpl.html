@@ -1,0 +1,26 @@
+<div class="searchAddress animated slideInFromRight">
+    <div class="s_address">
+      <!-- <div class="s_changeC">
+      	<p class="s_currentC" ng-class="{'checked':showcities}" ng-click="showCitiesFn()">{{currentCity}}<span class="s_dropdown"><em class="s_dropicon"></em></span></p>
+      	<ul class="s_clist" ng-show="showcities">
+      		<li ng-repeat="city in citylist"  value="{{city.city}}" ng-click="changeCity(city)">{{city.name}}</li>
+      	</ul>      	
+      </div> -->
+      <p class="s_addrInput">
+        <input type="text" ng-model="key" ng-change="search()"  placeholder="小区/写字楼/学校等">
+      </p>
+      <span class="cancel" ng-click="removedirective()">取消</span>
+      <span class="searchico"><em class="iconfont"></em></span>
+    </div>
+    <div class="">
+      <section class="address_list" ng-repeat="a in addressList" ng-click="choosed(a)">
+        <div class="m_addresslist">
+          <p class="address_build">
+            <b>{{::a.name}}</b>
+          </p>
+          <p class="greyclr">{{::a.address}}</p>
+        </div>
+        <p class="hidden district">{{::a.district}}</p>
+      </section>
+  </div>    
+</div>

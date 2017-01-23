@@ -1,0 +1,40 @@
+<div class="order_page">
+<hl-header seearound='true' ></hl-header>
+
+<article:nav class="order_nav clear">
+  <ul>
+    <li ng-class="{on:!isHistory}" ng-click="getList(false)">进行中<span class="right_line"></span></li>
+    <li ng-class="{on:isHistory}" ng-click="getList(true)">历史订单</li>
+  </ul>
+</article:nav>
+
+<article:cartmodule class="whitebg mt15" ng-repeat=" o in orderList">
+  <header>
+    <p class="shopname">{{o.email}}</p>
+    <span class="myorder_shop_ico chooseall"><em class="iconfont"></em></span>
+    <span class="havepay shoplink">{{o.orderStatusStr}}</span>
+  </header>
+  <article:itempic class="mt15 whitebg">
+    <ul class="clear">
+      <li ng-repeat="og in o.orderGoods">
+        <p class="item-pic">
+        	<img ng-if="og.picUrl!=undefined&&og.picUrl!=''" ng-src="{{imgUrl}}{{og.picUrl}}?s=220x220">
+        	<img ng-if="og.picUrl==undefined||og.picUrl==''" ng-src="assets/v3/images/defaultpic4.png">
+        </p>
+        <!-- 当图片数量大于1时，才显示那个角标 -->
+        <span ng-if="og.goodsNumber>1" class="num_label">{{og.goodsNumber}}</span>
+      </li>     
+    </ul>
+    
+  </article:itempic>
+  <footer> 订单付款：<span>{{o.orderAmount/100 | currency:"￥"}}</span> </footer>
+  <a href="#/order/detail/{{o.id}}" target="_self" class="orderDetail_link">{{o.email}}</a>
+</article:cartmodule>
+<div class="collect_blank ng-scope" id="collect_blank" ng-if="orderList.length==0"> 
+	<div class="collect_bb">
+		<p class="collect_bbpic"><img src="assets/v3/images/blankico.png"></p>
+		<p class="co-btn">暂无未处理订单</p>
+	</div>
+</div>
+</div>
+

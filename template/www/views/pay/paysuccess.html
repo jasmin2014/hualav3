@@ -1,0 +1,16 @@
+
+<div class="paysuccess">
+	<section class="pannel1">
+		<div class="pay-code"><img ng-src="assets/v3/images/scanpaysuccess.png"></div>
+		<h1>付款成功</h1>
+		<div class="pannel1-content">
+			<p>扫码店铺：{{sellerName}}</p>
+			<p>订单编号：{{order.orderSn}}</p>
+			<p>订单时间：{{order.addTime | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+			<p>付款金额：{{order.payAmount/100 | currency:"￥"}}</p>
+			<p>优惠金额：{{order.discountAmount/100 | currency:"￥"}}</p>
+			<p>实付金额：{{order.orderAmount/100 | currency:"￥"}}</p>
+		</div>		
+	</section>
+	<div class="pannel2" ng-click="gotoPay(order.referer)">继续支付</div>
+</div>

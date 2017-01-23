@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no,minimal-ui,text/html; charset=UTF-8" />
+		<title>花啦生活-支付宝支付</title>
+	</head>
+	<body>
+		<form id="alipaysubmit" name="alipaysubmit" action="https://mapi.alipay.com/gateway.do?_input_charset=utf-8" method="get">
+			<#if resMap ? exists>
+                <#list resMap ? keys as key> 
+                	<input type="hidden" name="${key}" value="${resMap[key]}"/>
+                </#list>
+            </#if>
+			<input type="submit" value="确认" style="display:none;">
+		</form>
+		<script>document.forms['alipaysubmit'].submit();</script>
+	</body>
+</html>

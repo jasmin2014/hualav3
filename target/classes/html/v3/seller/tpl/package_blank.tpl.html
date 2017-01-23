@@ -1,0 +1,136 @@
+<div hasgo=""><div class="rp_btn" ng-if="show" ng-click="getpackage()"></div><div class="red_mask" ng-click="remove()" ng-if="hasAct"></div><div class="rp_paper animated scaleIn" ng-if="hasAct"><style type="text/css">			
+			html {font-family: Microsoft Yahei;}
+			@media (max-width: 319px) {
+				html {
+					font-size: 10px;				
+				}
+			}
+			@media (min-width: 320px) {
+				html {
+					font-size: 12px;				
+				}
+			}
+			@media (min-width: 341px) {
+				html {
+					font-size: 14px;				
+				}
+			}
+			@media (min-width: 361px) {
+				html {
+					font-size: 16px;				
+				}
+			}			
+			.activescards {
+				width: 100%;
+				height: 100vh;
+				-webkit-height: 100vh;
+				-moz-height: 100vh;
+				-ms-height: 100vh;
+				-o-height: 100vh;
+				background: rgba(0,0,0,0.1);
+				position: fixed;
+				left: 0;
+				top: 0;
+			}
+			.activelight {
+				width: 100%;
+				height: 100vh;
+				background: url("assets/v3/images/lightbeams.png") center center no-repeat;
+				opacity: 0.6;
+			}
+			.activeframe {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				width: 80%;
+				padding-bottom: 0.5rem;	
+				margin: -40% 0 0 -40%;		
+				border-radius: 8px;
+				-webkit-border-radius: 8px;
+				-moz-border-radius: 8px;
+				-o-border-radius: 8px;
+				-ms-border-radius: 8px;
+				background: -moz-linear-gradient(top, #fffde9 0%, #f2ae1c 100%);
+				background: -webkit-gradient(linear,left top, left bottom, color-stop(0%,#fffde9), color-stop(100%,#f2ae1c));
+				background: -webkit-linear-gradient(top, #fffde9 0%, #f2ae1c 100%);
+				background: -o-linear-gradient(top,#fffde9 0%, #f2ae1c 100%);
+				background: -ms-linear-gradient(top, #fffde9 0%, #f2ae1c 100%);
+				background: linear-gradient(to bottom, #fffde9 0%, #f2ae1c 100%);
+			}
+			.activeframe.framheight {	
+				margin: -70% 0 0 -40%;
+			}
+			.activeframe.framheight1 {
+				margin: -55% 0 0 -40%;
+			}
+			.activeuikits {
+				width: 100%;
+			}
+			.activeuikits1 {
+				width: 84%;
+				margin-left: -1.5rem;
+			}
+			.activeuikits1 img, .activeuikits2 img, .activebutton .gotouse img {width: 100%;}
+			.activeuikits2 {
+				position: absolute;
+	    		right: -1.5rem;
+	    		top: 2rem;
+	    		width: 60%;
+			}
+			.activelists > header {
+				line-height: 2rem;
+	    		text-align: center;
+	    		color: #e04854;
+	    		font-weight: bold;
+	    		font-family: Microsoft Yahei;
+	    		font-size: 0.9rem;
+			}
+			.activelists.iscroll {
+				height: 59vh;
+	    		overflow-x: hidden;
+	    		overflow-y: scroll;
+			}
+			.activeitems {
+				width: 90%;
+	    		margin: -0.5rem auto 0 auto;
+			}
+			.activeitems li {
+				background: url("assets/v3/images/redbg.png") no-repeat center center;
+				background-size: 100%;
+				padding: .8rem 0 0 .8rem;
+				margin-top: 0.5rem;
+			}
+			.activeitems li h3 {
+				color: #fff;
+				font-weight: normal;
+				font-size: 1rem;
+			}
+			.activeitems li p {
+				color: #fff;
+				font-size: 0.9rem;
+			}
+			.activebutton {
+				padding: .5rem 0;
+			}
+			.activebutton .gotouse{
+				display: block;
+				width: 50%;
+				margin: 0 auto;
+			}
+			.activelistbutton {
+				width: 90%;
+	    		height: 3.6rem;
+		   		margin: 0.5rem auto 0 auto;
+		    	border: 1px solid #fff;
+		    	border-radius: 6px;
+		    	text-align: center;
+		    	line-height: 3.6rem;
+			}
+			.activelistbutton a {
+				display: block;
+				width: 100%;
+				height: 100%;
+				color: #fff;
+				text-decoration: none;
+			}
+		</style><div class="activescards"><div class="activelight"></div><div class="activeframe" ng-class="{'framheight':act.length>2,'framheight1':act.length==2}"><div class="activeuikits"><div class="activeuikits1"><img src="assets/v3/images/luckycat.png"></div><div class="activeuikits2"><img src="assets/v3/images/title.png"></div></div><article class="activelists" ng-class="{'iscroll':act.length>3}"><header>恭喜获得{{act.length}}张优惠券</header><ul class="activeitems"><li ng-repeat="act in act"><h3>{{act.name}}</h3><p>适用范围：{{act.sellerName}}</p><div class="activebutton"><span class="gotouse" ng-click="gotouseFn(act.sellerId)"><img src="assets/v3/images/button.png"></span></div></li></ul></article><div class="activelistbutton"><a href="#/my/coupon">查看我的卡券信息</a></div></div></div></div></div>

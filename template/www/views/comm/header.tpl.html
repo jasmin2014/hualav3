@@ -1,0 +1,41 @@
+<header class="header cate-header">
+	<form>
+		<!-- 首页的返回 -->
+		<a href="javascript:window.history.go(-1)"
+			class="returnback" ng-if="returnback"><em class="iconfont">&#xe626;</em></a>
+		<!-- 其它页的周边看看 -->
+		<p class="seearound " ng-if="seearound">
+			<a href="/module/huala.html"> <em class="iconfont icon-location"></em> <span
+				class="around_txt">周边看看</span>
+			</a>
+		</p>
+		<!-- 首页的定位代码 -->
+		<p class="middle " ng-if="middle">
+			<a href="#/address/list/change"
+				class="ng-isolate-scope">送至：{{geo}}<span class="ng-binding"></span><em
+				class="iconfont downico">&#xe633;</em></a>
+		</p>
+		<!-- 其它页中间的搜索 -->
+		<p class="addressbox" ng-if="searchbox">
+			<input type="search" name="keyword" placeholder="搜索本店商品" ng-focus="gotoSearch()">
+		</p>
+		<p class="icon-cart">
+			<a href="#/cart"> <em class="iconfont icon-big">&#xe60a;</em>
+				<span class="cart_label"  ng-show='cartIcon'></span>
+			</a>
+		</p>
+		<p class="icon-nav"   ng-click="hidden=!hidden" ng-init="hidden=false">
+			<em class="iconfont icon-big">&#xe675;</em>
+		</p>
+		<nav class="popup" ng-if="hidden">
+			<ul>
+				<li><a href="#/seller">回到店铺</a></li>
+				<li><a href="#/order/list">订单中心</a></li>
+				<li><a href="#/my">个人中心</a></li>
+			</ul>
+			<p class="triangle">
+				<span></span>
+			</p>
+		</nav>
+	</form>
+</header>

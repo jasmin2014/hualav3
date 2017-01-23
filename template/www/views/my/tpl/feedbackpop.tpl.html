@@ -1,0 +1,15 @@
+<div>
+<div class="l-mask" ng-click="showfeed=false"></div>
+<div class="m-module">
+  <div>
+	<div data-userfor="0">
+	  <div class="sc-message" ng-if="invalid">输入的字符不低于15个</div>
+	  <div class="sc-message" ng-if="effective">确认提交吗？</div>
+	  <div class="sm-btns">
+	  	<span style="display:inline-block;padding: .8em 1.5em;" ng-if="!invalid" ng-click="cancelsubmit()">取消</span>    
+	    <span class="sm-cancel" ng-click="showfeed=false">好的</span>
+	  </div>
+	</div>
+  </div>
+</div>
+</div>

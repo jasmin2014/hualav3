@@ -1,0 +1,33 @@
+<div class="chooseEnvelope animated slideInFromRight">
+  <header>红包/优惠券<span class="closeThisBox" ng-click="closePops()"><em class="iconfont">&#xe60d;</em></span></header>
+   <div class="envelope_list">
+     <!-- 满减券 --> 
+     <section class="envelopes" ng-repeat="c in order.actCart" ng-if="(c.sums/100)<=(order.goodAmount/100)" ng-click="choose(c)" ng-class="{'active':c.id==red.id}">
+       <p><img src="assets/v3/images/rpaper_list.png"></p>
+       <p class="redprice_c">
+         <span class="red_man">￥{{c.sums/100 | number}}</span>
+         <span class="red_jian">￥{{c.balance/100 | number}}</span>
+       </p>
+       <p class="envelope_txt">
+      	<span ng-if="c.type=='1'">仅限第一次下单时在{{::c.sellerName}}使用，记得当天用掉哦</span>
+      	<span ng-if="c.type!='1'">{{c.content}}</span><br/>
+      	{{::c.startDay | dateformat | date:'yyyy-MM-dd' }}至{{::c.endTime | dateformat | date:'yyyy-MM-dd' }}
+       </p>
+       <p class="envelope_title">{{c.name}}</p>
+     </section>
+     <section class="envelopes" ng-repeat="c in order.actCart" ng-if="(c.sums/100)>(order.goodAmount/100)">
+       <p><img src="assets/v3/images/rpaper_b.png"></p>
+       <p class="redprice_c">
+         <span class="red_man">￥{{c.sums/100 | number}}</span>
+         <span class="red_jian">￥{{c.balance/100 | number}}</span>
+       </p>
+       <p class="envelope_txt">
+      	<span ng-if="c.type=='1'">仅限第一次下单时在{{::c.sellerName}}使用，记得当天用掉哦</span>
+      	<span ng-if="c.type!='1'">{{c.content}}</span><br/>
+      	{{::c.startDay | dateformat | date:'yyyy-MM-dd' }}至{{::c.endTime | dateformat | date:'yyyy-MM-dd' }}
+       </p>
+       <p class="envelope_title">{{c.name}}</p>
+     </section>   	 	 	 
+  </div>
+  <div class="choosedate_ok" ng-click="confirm()">确定</div>
+</div>

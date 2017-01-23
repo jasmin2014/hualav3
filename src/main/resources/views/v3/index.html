@@ -1,0 +1,36 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<title>花啦生活</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta content="telephone=no" name="format-detection" />
+<link rel="stylesheet" type="text/css" href="assets/v3/css/main.min.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/v3/fonts/iconfont.css">
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=zHNmFc3z0ho52KdH0cH9mDF5LRiulbx6&s=1"></script>
+<script type="text/javascript">
+    var ctx="${rc.contextPath}/";
+    var imgUrl="${imgUrl}";
+    var wxconfig={debug: false,appId: '${appId}',timestamp: ${timestamp},nonceStr: '${nonceStr}',signature: '${signature}',jsApiList: ['onMenuShareTimeline','onMenuShareAppMessage']}
+  </script>
+  <!-- <base href="/xiaopai-gly/"> -->
+</head>
+<body ng-controller="baseCtrl" class="greybgclr"
+	ng-class="{'i-notscroll':loading}"  id="top" >
+	<div class="i-message" ng-if="loading">
+		<div class="i-mask"></div>
+		<div class="i-messinner">
+			<img src="assets/v3/images/loading.png">
+		</div>
+	</div>
+	<div ng-view id="ng-view"></div>
+	<script src="assets/v3/js/lib.min.js"></script>
+	<script src="assets/v3/js/third.min.js"></script>
+	<script src="assets/v3/js/main.min.js"></script>
+</body>
+</html>

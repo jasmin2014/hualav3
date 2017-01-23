@@ -1,0 +1,95 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+<title>花啦生活</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta content="telephone=no" name="format-detection" />
+<link rel="stylesheet" type="text/css" href="assets/v3/css/main.min.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/v3/fonts/iconfont.css">
+<link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+	rel="stylesheet">
+<script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script src="assets/v3/js/lib.min.js"></script>
+<script src="assets/v3/js/third.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+	var ctx = "${ctx}/";
+	var imgUrl = "${imgUrl}";
+</script>
+
+<script type="text/javascript">
+	angular.module("app", []).controller('mongoCtrl',
+			[ '$scope', '$http', function($scope, $http, $) {
+				$scope.page = 0;
+				$scope.get = function(opt) {
+					$scope.page = $scope.page + opt;
+					if ($scope.page < 0) {
+						$scope.page = 0;
+					}
+					$http.get(ctx + "/v3/mongo/sellerList", {
+						params : {
+							page : $scope.page
+						}
+					}).success(function(d) {
+						$scope.sellerList = d;
+					});
+				}
+				$scope.get(0);
+				
+				$scope.sync=function(name){
+					$http.get(ctx + "/v3/"+name).success(function(d) {});
+				}
+			} ]);
+</script>
+</head>
+<body class="container" ng-controller="mongoCtrl">
+<div class="panel panel-default  panel-primary">
+	 <div class="panel-heading">
+	    <h3 class="panel-title">数据同步操作</h3>
+	  </div>
+  <div class="panel-body">
+	   <div class="btn-group" role="group" aria-label="同步操作">
+			<button type="button" class="btn btn-default btn-danger" ng-click="sync('sync-seller')">同步店铺与供应商信息</button>
+			<button type="button" class="btn btn-default btn-warning" ng-click="sync('sync-goods')">同步商品信息</button>
+			<button type="button" class="btn btn-default btn-success" ng-click="sync('sync-goods-cat')">同步分类信息</button>
+		</div>
+  </div>
+</div>
+	
+	<table class="table table-hover">
+		<thead class="row">
+			<tr>
+				<th class="col-md-1">店铺ID</th>
+				<th class="col-md-1">店铺名称</th>
+				<th>详细信息</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="s in sellerList" ng-class="{'info':s.sellerStatus==1}">
+				<td>{{s.id}}</td>
+				<td>{{s.name}}</td>
+				<td>{{s}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<nav>
+		<ul class="pagination">
+			<li ng-click="get(-1)"><a href="#" aria-label="Previous"> <span
+					aria-hidden="true">&laquo;</span>
+			</a></li>
+			<li ng-click="get(1)"><a href="#" aria-label="Next"> <span
+					aria-hidden="true">&raquo;</span>
+			</a></li>
+		</ul>
+	</nav>
+</body>
+
+</html>

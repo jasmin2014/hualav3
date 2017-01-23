@@ -1,0 +1,62 @@
+<div class="usercenter">
+  <header class="uc-header">
+    <div class="uc-headicon clear">
+      <p class="shoppic"><img alt="" ng-src="{{user.picUrl}}" square-picture></p>
+      <section>
+      	<h3>{{user.name}}</h3>
+      	<p class="greyclr">{{user.mobile}}</p>
+      </section>
+    </div>
+    <div class="uc-items">
+    	<a href="#/order/list">
+    	  <p class="uc-pic"><em class="iconfont fsz240">&#xe66b;</em></p>
+    	  <p class="uc-itemname">我的订单</p>
+    	</a>
+    	<a href="#/my/coupon">
+    	  <p class="uc-pic"><em class="iconfont fsz240">&#xe607;</em></p>
+    	  <p class="uc-itemname">优惠券包</p>
+    	</a>
+    	<a href="#/address/list/manage">
+    	  <p class="uc-pic"><em class="iconfont fsz240">&#xe67f;</em></p>
+    	  <p class="uc-itemname">地址管理</p>
+    	</a>
+    </div>
+  </header>
+  <div class="uc-itemelses">
+    <a href="#/my/collections" class="uc-itemelse"><span class="uc-itemicon uc-i1"></span>收藏的店铺<span class="uc-itemlink"><em class="iconfont">&#xe625;</em></span></a>
+    <a href="#/cart" class="uc-itemelse"><span class="uc-itemicon uc-i2"></span>我的购物车<span class="uc-itemlink"><em class="iconfont">&#xe625;</em></span></a>
+    <a class="uc-itemelse mt10" ng-click="load()"><span class="uc-itemicon uc-i3"></span>常见问题<span class="uc-itemlink"><em class="iconfont">&#xe625;</em></span></a>
+    <div class="uc-itemelse" ng-click="showfeedback=true"><span class="uc-itemicon uc-i4"></span>意见反馈<span class="uc-itemlink"><em class="iconfont">&#xe625;</em></span></div>
+  </div>
+  <div class="uc-connect"><span class="big">联系花啦：{{user.customPhone}}</span><br><span class="small">服务时间：{{user.serverTime}}</span></div>
+  <div class="uc-itemexit" ng-click="logout()">退出账号</div>
+</div>
+
+<form name="myform" id="myform" ng-show="showfeedback" action="${rc.contextPath}/v3/feedback/add" method="post">
+<div class="feedbacktpl bgclr relative animated slideInFromRight">
+  <header class="f-header">
+    <span class="f-iconfont_fb"><em class="iconfont"></em></span>
+    <div class="f-cancel" ng-click="showfeedback=false">取消</div>
+    <span class="f-ok" ng-click="submittxt()">提交</span>
+  </header>  
+  
+  <textarea id="content" name="content" class="f-textarea"></textarea>
+  
+</div>
+</form>
+<div ng-show="showfeedpop">
+<div class="l-mask" ng-click="showfeedpop=false"></div>
+<div class="m-module">
+  <div>
+	<div data-userfor="0">
+	  <div class="sc-message" ng-show="invalid">输入的字符不低于15个</div>
+	  <div class="sc-message" ng-show="effective">确认提交吗？</div>
+	  <div class="sm-btns">
+	  	<span style="display:inline-block;padding: .8em 1.5em;" ng-show="effective" ng-click="showfeedpop=false">取消</span>    
+	    <span class="sm-cancel" ng-show="invalid" ng-click="showfeedpop=false;">好的</span>
+	    <span class="sm-cancel" ng-show="effective" ng-click="submit()">好的</span>
+	  </div>
+	</div>
+  </div>
+</div>
+</div>

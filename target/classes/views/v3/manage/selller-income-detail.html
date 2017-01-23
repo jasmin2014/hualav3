@@ -1,0 +1,53 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+<title>花啦生活</title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta content="telephone=no" name="format-detection" />
+<link rel="stylesheet" type="text/css" href="assets/v3/css/main.min.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/v3/fonts/iconfont.css">
+<link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+	rel="stylesheet">
+
+
+</head>
+<body class="container">
+<div class="panel panel-default  panel-primary">
+</div>
+	
+	<table class="table table-hover">
+		<thead class="row">
+			<tr>
+				<th class="col-md-1">店铺ID</th>
+				<th class="col-md-3">店铺名称</th>
+				<th class="col-md-2">订单编号</th>
+				<th class="col-md-2">金额</th>
+				<th class="col-md-2">类型</th>
+				<th class="col-md-2">时间</th>
+			</tr>
+		</thead>
+		<tbody>
+			<#list income as c>
+            	<tr>
+            	  <td>${c.sellerId}</td>
+            	  <td>${c.name}</td>
+            	  <td>${c.orderSn}</td>
+            	  <td>${c.amount}</td>
+            	  <td>${c.remark}</td>
+            	  <td>${c.addTime}</td>
+            	</tr>
+            </#list>
+		</tbody>
+	</table>
+	
+</body>
+
+</html>

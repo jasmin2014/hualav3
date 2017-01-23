@@ -1,0 +1,32 @@
+<div class="choosedate whitebg animated slideInFromRight">
+	<header>
+		预约时间<span class="closeThisBox" ng-click="closePops()"><em
+			class="iconfont">&#xe60d;</em></span>
+	</header>
+	<section>
+		<h3>日期</h3>
+		<ul class="clear">
+			<li ng-repeat="t in orderTimes" ng-click="chooseDay(t)"
+				ng-class="{'active':t.name==choose}"><span>{{t.name}}</span>
+				<div>
+					<p class="active_label"></p>
+					<em class="iconfont active_icon">&#xe670;</em>
+				</div>
+			</li>
+		</ul>
+	</section>
+	<section>
+		<h3>时间</h3>
+		<ul class="clear">
+			<li ng-repeat="d in list" ng-click="choosedate(d)"
+				ng-class="{'active':d.bestTime==bestTime}"><span>{{d.day}}
+					{{d.showTime}}</span>
+				<div>
+					<p class="active_label"></p>
+					<em class="iconfont active_icon">&#xe670;</em>
+				</div></li>
+		</ul>
+	</section>
+	<div class="choosedate_ok" id="choosedate_ok" ng-click="showMess()">确定</div>
+
+</div>

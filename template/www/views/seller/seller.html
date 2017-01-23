@@ -1,0 +1,83 @@
+
+<!-- 页面头部 -->
+<hl-header seearound='true' middle='true' action="getSeller()"></hl-header>
+<div class="closeSeller" ng-show="seller.sellerStatus==='1'">该店暂时不能下单，敬请谅解！</div>
+<article:shoplist class="noboder shopDetail_mess whitebg" ng-class="{'mt3d2':seller.sellerStatus!=='1'}">
+	<section>
+		<div class="sellermess">
+			<p class="shoppic">
+				<img ng-if="seller.imgUrl!=undefined&&seller.imgUrl!=''" class="radiuspic" square-picture ng-src="{{::imgUrl}}{{::seller.imgUrl}}?s=220x220" >
+				<img ng-if="seller.imgUrl==undefined||seller.imgUrl==''" class="radiuspic" square-picture ng-src="assets/v3/images/defaultpic02.png">
+			</p>
+			<div class="shop-mess">
+				<h3>{{seller.name}}</h3>
+				<p>营业时间：{{seller.openTime}}-{{seller.endTime}}</p>
+			</div>
+			<p collect seller-id="seller.id" show="show"></p>
+			<a href="#/seller/detail/{{seller.id}}" title="{{seller.name}}"></a>
+		</div>
+	</section>
+</article:shoplist>
+<div class="sbanners" ng-if="banners.length>0">
+<div class="ui-page">
+    <div class="ui-bannerSwipe">
+	  <div  class='ui-banner-swipe-wrap'>
+		<div ng-repeat="b in banners" hl-swipe>
+		   <a ng-href="{{b.url}}"><img ng-src="{{imgUrl}}{{b.imgUrl}}" alt="" /></a>
+		</div>
+	  </div>
+	  <ul ng-if="banners.length>1" class="ui-banner-swipe-nav" ng-class="{'on':$index==0}">
+	    <li ng-repeat="p in banners"></li>
+	  </ul>		
+    </div>
+</div>
+</div>
+<div class="activemodels">
+<header ng-if="actList.length>0" class="articleheader">
+	<h2>
+		推荐活动
+		<span class="ahpic"><img alt="" src="assets/v3/images/likes.png"></span>
+	</h2>
+</header>
+<article:prolist class="whitebg"  ng-repeat="act in actList">
+	<header class="activetitle">
+		<a href="#goods/activelist?sellerId={{::seller.id}}&cid={{::act.actId}}&cname={{::act.name}}&type=-1&actImg={{::imgUrl}}{{act.picImg}}"><img alt="{{::act.name}}" ng-src="{{::imgUrl}}{{act.picImg}}"></a>
+	</header>
+	<ul:prolist class="clear btmbdr">
+		<li ng-repeat="g in act.goodsList">
+			<a href="#/goods/detail?sellerId={{::seller.id}}&goodsId={{::g.goodsId}}">
+				<p class="propic">
+					<img ng-if="g.picUrl!=undefined&&g.picUrl!=''" square-picture ng-src="{{::imgUrl}}{{::g.picUrl}}?s=220x220">
+					<img ng-if="g.picUrl==undefined||g.picUrl==''" square-picture ng-src="assets/v3/images/defaultpic4.png">
+				</p>
+				<p class="proname">{{::g.title}}</p>
+			</a>
+			<div class="proprice clear">
+				<span class="p_price">{{g.price/100 | currency:"￥"}}</span>
+				<div class="icon-cart" add-cart goods="g" seller-id="seller.id">
+					<em class="iconfont">&#xe60a;</em>
+				</div>
+			</div>
+			<p class="rightline"></p> 
+			<span class="cartsuccess_ico" ng-if="g.goodNum>0"><em class="iconfont">&#xe63e;</em></span>
+			<em ng-if="act.imgUrl" class="{{act.imgUrl}}-status small"></em>
+		</li>
+	</ul:prolist>
+</article:prolist>
+</div>
+<article:cates class="whitebg">
+	<header:title class="bottombdr">商品分类  <em class="iconfont icon-cate">全</em></header:title>
+	<ul class="clear">
+		<li ng-repeat="c in cat">
+			<a href="#/goods/cat?sellerId={{seller.id}}&sellerName={{seller.name}}&cid={{c.cid}}&cname={{c.cname}}&type=1">
+				<p class="catepic">
+					<img ng-if="c.catImg!=''&&c.catImg!=undefined" square-picture ng-src="{{imgUrl}}{{c.catImg}}" alt="{{c.cname}}">
+					<img ng-if="c.catImg==''||c.catImg==undefined" square-picture ng-src="assets/v3/images/defaultpic4.png" alt="{{c.cname}}">
+				</p>
+				<p class="catename">{{c.cname}}</p>
+			</a>
+		</li>
+	</ul>
+	<a href="#/goods/cat?sellerId={{seller.id}}&sellerName={{seller.name}}" class="lookMoreCate greyclr">查看全部</a>
+</article:cates>
+<!-- <div class="rp_btn"><img alt="" src="assets/v3/images/rpbtn.png" /></div> -->
